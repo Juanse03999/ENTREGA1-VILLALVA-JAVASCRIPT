@@ -7,11 +7,11 @@ function ejecutarSimulador() {
     console.log("Se ejecuta el simulador.");
     alert("¡BIENVENIDO AL SIMULADOR DE DESCUENTOS!");
 
-    let numero;
+    let precio;
 
     do {
         console.log("Esperando a que el usuario ingrese el precio de su producto.");
-        let precio = prompt("⬇ Ingresá el precio de tu producto a continuación ⬇");
+        precio = prompt("⬇ Ingresá el precio de tu producto a continuación ⬇");
 
         if (precio === null) {
             console.log("Se cancela la operación.");
@@ -20,17 +20,17 @@ function ejecutarSimulador() {
             return;
         }
 
-        numero = parseFloat(precio);
+        precio = parseFloat(precio);
 
-        if (isNaN(numero)) {
+        if (isNaN(precio)) {
 
             console.log("Se ingresó un número no válido.");
             alert("Error: Debes ingresar un número válido.");
 
         }
-    } while (isNaN(numero));
+    } while (isNaN(precio));
 
-    alert("El precio de tu producto es de: $" + numero);
+    alert("El precio de tu producto es de: $" + precio);
 
     
     //  ARRAY DE DESCUENTOS:
@@ -51,25 +51,23 @@ function ejecutarSimulador() {
     let opcion = parseInt(prompt(mensaje + "\n\nElige una opción (1-5):"));
 
 
-    
-    while (!isNaN(opcion) || opcion < 1 || opcion > descuentosDisponibles.length) {
-        
-        console.log("Se ingresó una opción no válida.");
-        alert("Error: Debes ingresar una opción válida.");
-        
+    // Validar que la opción elegida sea válida
+    while (isNaN(opcion) || opcion < 1 || opcion > descuentosDisponibles.length) {
+
+        alert("Opción inválida. Seleccione un número de la lista.");
         opcion = parseInt(prompt(mensaje + "\n\nElige una opción (1-5):"));
 
     }
-
     
     // Obtenemos el porcentaje de descuento seleccionado
     let descuentoElegido = descuentosDisponibles[opcion - 1];
 
     // Calculamos el precio final con el descuento aplicado
-    let precioFinal = precio - (precio * (descuentoElegido / 100));
+    let precioFinal = parseFloat(precio) - (parseFloat(precio) * (descuentoElegido / 100));
 
     // Mostramos el resultado
     alert(`Precio original: $${precio.toFixed(2)}\nDescuento aplicado: ${descuentoElegido}%\nPrecio final: $${precioFinal.toFixed(2)}`);
+
     
     
     
